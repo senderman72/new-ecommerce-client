@@ -3,7 +3,10 @@ import { create } from "../serviceBase";
 
 export const createProduct = async (product: ProductCreate): Promise<void> => {
   try {
-    const response = await create("http://localhost:3000/products", product);
+    const response = await create(
+      "https://new-ecom-api.vercel.app/products",
+      product
+    );
 
     console.log(response);
   } catch (error) {
