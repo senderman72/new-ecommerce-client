@@ -66,8 +66,10 @@ const CheckoutPage = () => {
       );
 
       const orderResponse = await placeOrder(customerData.id, orderItems);
-      console.log(orderResponse);
-      if (orderResponse?.order_id) setOrderId(orderResponse.order_id);
+
+      const orderId = orderResponse?.order_id ?? orderResponse?.id;
+
+      if (orderId) setOrderId(orderId);
       else throw new Error("Missing order ID in response");
     } catch (error) {
       console.error("Error during checkout:", error);

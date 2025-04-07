@@ -16,7 +16,7 @@ const StripeEmbedded = ({ cart, orderId }) => {
     console.log("cart:", cart);
     console.log("customerId:", orderId);
     return fetch(
-      "http://localhost:3000/stripe/create-checkout-session-embedded",
+      "https://new-ecom-api.vercel.app/stripe/create-checkout-session-embedded",
       {
         method: "POST",
         headers: {
