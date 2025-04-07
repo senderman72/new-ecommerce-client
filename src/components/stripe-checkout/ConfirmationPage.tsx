@@ -16,6 +16,7 @@ const ConfirmationPage = () => {
   const { paymentId: sessionId } = useParams();
 
   useEffect(() => {
+    console.log(sessionId);
     const getSessionStatus = async () => {
       const status = await sessionService.getSessionStatus(sessionId);
       setSessionStatus(status);
