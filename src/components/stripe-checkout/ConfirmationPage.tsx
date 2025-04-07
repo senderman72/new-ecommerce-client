@@ -13,7 +13,7 @@ const ConfirmationPage = () => {
     null
   );
 
-  const sessionId = useParams().session_id;
+  const { paymentId: sessionId } = useParams();
 
   useEffect(() => {
     const getSessionStatus = async () => {
@@ -23,19 +23,17 @@ const ConfirmationPage = () => {
     getSessionStatus();
   }, [sessionId]);
 
-  if (sessionStatus) {
-    if (sessionStatus.status === "complete") {
-      return <SuccessPage />;
-    } else if (sessionStatus.status === "open") {
-      return;
-    }
+  if (!sessionStatus) return <div>Loading...</div>;
+
+  if (sessionStatus.status === "complete") {
+    return <SuccessPage />;
   }
 
-  return (
-    <div>
-      <SuccessPage />;
-    </div>
-  );
+  if (sessionStatus.status === "open") {
+    return <div>Betalning pågår fortfarande...</div>;
+  }
+
+  return <div>Betalning misslyckades eller avbröts.</div>;
 };
 
 export default ConfirmationPage;
