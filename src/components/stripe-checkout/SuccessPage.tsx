@@ -10,13 +10,15 @@ import {
   SucessOrderListContainer,
 } from "../styled/styledCheckout/SuccessContainer";
 import { StyledLink } from "../styled/styledProducts/ProductCards";
-import { useParams } from "react-router";
 
 import { getOrderByPaymentId } from "../../services/orderService/getOrderByPaymentId";
 import { IOrder } from "../../models/IOrder";
 
-const SuccessPage = () => {
-  const { paymentId } = useParams<string>();
+interface PaymentProps {
+  paymentId: string;
+}
+
+const SuccessPage = ({ paymentId }: PaymentProps) => {
   const [order, setOrder] = useState<IOrder | null>();
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -49,6 +51,16 @@ const SuccessPage = () => {
     return (
       <SuccessContainer>
         <Heading>Väntar på att bekräfta bokning... häng kvar...</Heading>
+      </SuccessContainer>
+    );
+  }
+
+  if (!order) {
+    return (
+      <SuccessContainer>
+        <Heading>Kunde inte hitta någon order 😕</Heading>
+        <Paragraph>Kontakta support om du tror detta är ett misstag.</Paragraph>
+        <StyledLink to="/">Till startsidan</StyledLink>
       </SuccessContainer>
     );
   }
