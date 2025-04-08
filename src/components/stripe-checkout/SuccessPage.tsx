@@ -35,6 +35,7 @@ const SuccessPage = ({ paymentId }: PaymentProps) => {
         console.log("payementId:", data);
         setOrder(data);
         setLoading(false);
+        clearInterval(interval);
       } catch {
         console.log("Kunde inte hämta ordern.");
       }
