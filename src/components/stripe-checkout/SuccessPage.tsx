@@ -30,7 +30,7 @@ const SuccessPage = () => {
 
       try {
         const data = await getOrderByPaymentId(paymentId);
-        console.log(data);
+        console.log("payementId:", data);
         setOrder(data);
         setLoading(false);
       } catch {

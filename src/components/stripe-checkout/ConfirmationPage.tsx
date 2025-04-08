@@ -14,20 +14,16 @@ const ConfirmationPage = () => {
   );
 
   const { paymentId: sessionId } = useParams();
-  console.log(sessionId);
+  console.log("payemtnetId", sessionId);
 
   useEffect(() => {
     const getSessionStatus = async () => {
       const status = await sessionService.getSessionStatus(sessionId);
-      console.log(status);
+      console.log("status", status);
       setSessionStatus(status);
     };
     getSessionStatus();
   }, [sessionId]);
-
-  if (sessionStatus === null) {
-    return <div>Loading...</div>;
-  }
 
   if (sessionStatus.status === "complete") {
     return <SuccessPage />;
