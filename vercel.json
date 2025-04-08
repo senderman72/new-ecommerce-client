@@ -1,9 +1,3 @@
 {
-  "rewrites": [
-    { "source": "/((?!.*\\.js$).*)", "destination": "/index.html" },
-    {
-      "source": "/order-confirmation/:paymentId",
-      "destination": "/order-confirmation/:paymentId"
-    }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
