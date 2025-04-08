@@ -1,6 +1,9 @@
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" },
-    { "source": "/(.*)\\.js$", "destination": "/:splat" }
+    { "source": "/((?!.*\\.js$).*)", "destination": "/index.html" },
+    {
+      "source": "/order-confirmation/:paymentId",
+      "destination": "/order-confirmation/:paymentId"
+    }
   ]
 }
