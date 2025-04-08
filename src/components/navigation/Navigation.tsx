@@ -8,6 +8,7 @@ import {
 import { CartIndicator } from "../styled/styledNavigation/CartIndicator";
 import { CartContext } from "../../contexts/CartContext";
 import ShoppingCart from "../shoppingCart/ShoppingCart";
+import SearchInput from "../searchfunction/SearchInput";
 
 const Navigation = () => {
   const cartContext = useContext(CartContext);
@@ -33,6 +34,7 @@ const Navigation = () => {
           <NavigationLink to="/admin">Admin</NavigationLink>
         </li>
       </NavigationList>
+      <SearchInput />
       <div onClick={toggleCart}>
         <LuShoppingCart size={30} />
         {cartCount > 0 && <CartIndicator>{cartCount}</CartIndicator>}
