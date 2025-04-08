@@ -19,12 +19,15 @@ const ConfirmationPage = () => {
   useEffect(() => {
     const getSessionStatus = async () => {
       const status = await sessionService.getSessionStatus(sessionId);
+      console.log(status);
       setSessionStatus(status);
     };
     getSessionStatus();
   }, [sessionId]);
 
-  if (!sessionStatus) return <div>Loading...</div>;
+  if (sessionStatus === null) {
+    return <div>Loading...</div>;
+  }
 
   if (sessionStatus.status === "complete") {
     return <SuccessPage />;
