@@ -4,14 +4,16 @@ export const StyledDropdownContainer = styled.ul`
   position: absolute;
   top: 11dvh;
 
-  width: 50vw;
+  width: 70vw;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 4px;
   list-style: none;
   padding: 0.5rem;
   z-index: 999;
-  max-height: 300px;
+  max-height: 400px;
   overflow-y: auto;
 
   @media (max-width: 768px) {
@@ -20,7 +22,7 @@ export const StyledDropdownContainer = styled.ul`
 `;
 
 export const StyledResultItem = styled.li`
-  padding: 1rem;
+  padding: 0.5rem;
   border-bottom: 1px solid #eee;
   cursor: pointer;
 
@@ -56,4 +58,8 @@ export const ResultText = styled.div`
   small {
     color: #666;
   }
+`;
+
+export const NotinStock = styled.h5`
+  color: red;
 `;

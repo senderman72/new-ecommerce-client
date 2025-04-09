@@ -1,5 +1,6 @@
 import { IProduct } from "../../models/IProducts";
 import {
+  NotinStock,
   ResultImage,
   ResultText,
   StyledDropdownContainer,
@@ -77,6 +78,7 @@ const DropDownSearch = ({
                       rel="noopener noreferrer"
                     >
                       <strong>{result.title}</strong>
+                      <NotinStock> tillfälligt slut</NotinStock>
                     </a>
                     {result.snippet && <small>{result.snippet}</small>}
                   </ResultText>
