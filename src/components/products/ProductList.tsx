@@ -13,6 +13,8 @@ import {
 const ProductList = () => {
   const { products } = useProducts();
 
+  console.log(products);
+
   return (
     <>
       <h1>Produkter</h1>

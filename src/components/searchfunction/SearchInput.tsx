@@ -3,7 +3,7 @@ import {
   StyledSearchForm,
   StyledSearchInput,
 } from "../styled/styledsearch/StyledSearchinput";
-import { ChangeEvent, FormEvent, use, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { getGoogleSearch } from "../../services/googleApi/getGoogleSearch";
 import DropDownSearch from "./DropDownSearch";
 

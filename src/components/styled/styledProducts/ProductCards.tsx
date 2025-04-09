@@ -38,8 +38,9 @@ export const ProductCard = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-  padding: 0.8rem 0rem;
+  gap: 0.5rem;
+  padding: 0.5rem 0.5rem;
+  text-align: center;
 
   &:hover {
     transform: scale(1.05);
@@ -49,7 +50,7 @@ export const ProductCard = styled.div`
 
 export const ProductImageContainer = styled.div`
   display: flex;
-  width: 80%;
+  width: 90%;
   height: 50%;
 `;
 
