@@ -12,6 +12,7 @@ interface SearchResult {
   link: string;
   snippet: string;
   displayLink: string;
+  image?: string;
 }
 
 const SearchInput = () => {
@@ -32,6 +33,7 @@ const SearchInput = () => {
           link: item.link,
           snippet: item.snippet,
           displayLink: item.displayLink,
+          image: item.pagemap?.cse_image?.[0]?.src,
         })) ?? [];
 
       console.log(response);
@@ -51,7 +53,7 @@ const SearchInput = () => {
             setSearchQuery(e.target.value);
           }}
         />
-        <IoMdSearch size={50} onClick={handleSearch} />
+        <IoMdSearch size={40} onClick={handleSearch} />
       </StyledSearchForm>
       <DropDownSearch results={results} />
     </div>

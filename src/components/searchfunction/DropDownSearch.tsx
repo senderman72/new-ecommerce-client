@@ -1,6 +1,8 @@
 import React from "react";
 
 import {
+  ResultImage,
+  ResultText,
   StyledDropdownContainer,
   StyledResultItem,
 } from "../styled/styledsearch/StyledDropdownContainer";
@@ -10,6 +12,7 @@ interface SearchResult {
   link: string;
   snippet: string;
   displayLink: string;
+  image: string;
 }
 
 interface DropDownSearchProps {
@@ -24,9 +27,13 @@ const DropDownSearch: React.FC<DropDownSearchProps> = ({ results }) => {
       {results.map((result, index) => (
         <StyledResultItem key={index}>
           <a href={result.link} target="_blank" rel="noopener noreferrer">
-            <strong>{result.title}</strong>
-            <br />
-            <small>{result.snippet}</small>
+            {result.image && (
+              <ResultImage src={result.image} alt={result.title} />
+            )}
+            <ResultText>
+              <strong>{result.title}</strong>
+              <small>{result.snippet}</small>
+            </ResultText>
           </a>
         </StyledResultItem>
       ))}

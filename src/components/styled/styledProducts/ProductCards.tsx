@@ -39,7 +39,7 @@ export const ProductCard = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  padding: 0rem 0.5rem;
+  padding: 0.8rem 0rem;
 
   &:hover {
     transform: scale(1.05);
