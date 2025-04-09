@@ -5,9 +5,18 @@ import {
 } from "../styled/styledsearch/StyledSearchinput";
 import { ChangeEvent, FormEvent, use, useState } from "react";
 import { getGoogleSearch } from "../../services/googleApi/getGoogleSearch";
+import DropDownSearch from "./DropDownSearch";
+
+interface SearchResult {
+  title: string;
+  link: string;
+  snippet: string;
+  displayLink: string;
+}
 
 const SearchInput = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [results, setResults] = useState<SearchResult[]>([]);
 
   const handleSearch = async (e: FormEvent) => {
     e.preventDefault();
@@ -16,23 +25,36 @@ const SearchInput = () => {
 
     try {
       const response = await getGoogleSearch(searchQuery);
+
+      const items =
+        response.items?.map((item) => ({
+          title: item.title,
+          link: item.link,
+          snippet: item.snippet,
+          displayLink: item.displayLink,
+        })) ?? [];
+
       console.log(response);
+      setResults(items);
     } catch {
       console.log("something went wrong");
     }
   };
 
   return (
-    <StyledSearchForm>
-      <StyledSearchInput
-        type="text"
-        placeholder="sök"
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          setSearchQuery(e.target.value);
-        }}
-      />
-      <IoMdSearch size={50} onClick={handleSearch} />
-    </StyledSearchForm>
+    <div style={{ position: "relative" }}>
+      <StyledSearchForm onSubmit={handleSearch}>
+        <StyledSearchInput
+          type="text"
+          placeholder="sök"
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setSearchQuery(e.target.value);
+          }}
+        />
+        <IoMdSearch size={50} onClick={handleSearch} />
+      </StyledSearchForm>
+      <DropDownSearch results={results} />
+    </div>
   );
 };
 
