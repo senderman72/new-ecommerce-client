@@ -6,6 +6,7 @@ import {
 import { ChangeEvent, FormEvent, useState } from "react";
 import { getGoogleSearch } from "../../services/googleApi/getGoogleSearch";
 import DropDownSearch from "./DropDownSearch";
+import useProducts from "../../hooks/useProducts";
 
 interface SearchResult {
   title: string;
@@ -18,6 +19,9 @@ interface SearchResult {
 const SearchInput = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [results, setResults] = useState<SearchResult[]>([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const { products } = useProducts();
 
   const handleSearch = async (e: FormEvent) => {
     e.preventDefault();
@@ -36,11 +40,15 @@ const SearchInput = () => {
           image: item.pagemap?.cse_image?.[0]?.src,
         })) ?? [];
 
-      console.log(response);
       setResults(items);
+      setShowDropdown(showDropdown);
     } catch {
       console.log("something went wrong");
     }
+  };
+
+  const closeDropdown = () => {
+    setShowDropdown(!showDropdown);
   };
 
   return (
@@ -53,9 +61,16 @@ const SearchInput = () => {
             setSearchQuery(e.target.value);
           }}
         />
-        <IoMdSearch size={40} onClick={handleSearch} />
+        <IoMdSearch size={40} />
       </StyledSearchForm>
-      <DropDownSearch results={results} />
+      {results.length > 0 && products.length > 0 && (
+        <DropDownSearch
+          results={results}
+          products={products}
+          query={searchQuery}
+          closeDropdown={closeDropdown}
+        />
+      )}
     </div>
   );
 };

@@ -1,5 +1,4 @@
-import React from "react";
-
+import { IProduct } from "../../models/IProducts";
 import {
   ResultImage,
   ResultText,
@@ -7,36 +6,86 @@ import {
   StyledResultItem,
 } from "../styled/styledsearch/StyledDropdownContainer";
 
-interface SearchResult {
+interface GoogleSearchResult {
   title: string;
   link: string;
-  snippet: string;
-  displayLink: string;
-  image: string;
+  snippet?: string;
+  image?: string;
 }
 
 interface DropDownSearchProps {
-  results: SearchResult[];
+  products: IProduct[];
+  results: GoogleSearchResult[];
+  query: string;
+  closeDropdown: () => void;
 }
 
-const DropDownSearch: React.FC<DropDownSearchProps> = ({ results }) => {
-  if (results.length === 0) return null;
+const DropDownSearch = ({
+  products,
+  results,
+  query,
+  closeDropdown,
+}: DropDownSearchProps) => {
+  if (results.length === 0 && products.length === 0) return null;
+
+  const handleProductClick = (productId: number) => {
+    closeDropdown();
+
+    window.location.href = `/products/${productId}`;
+  };
 
   return (
     <StyledDropdownContainer>
-      {results.map((result, index) => (
-        <StyledResultItem key={index}>
-          <a href={result.link} target="_blank" rel="noopener noreferrer">
-            {result.image && (
-              <ResultImage src={result.image} alt={result.title} />
-            )}
-            <ResultText>
-              <strong>{result.title}</strong>
-              <small>{result.snippet}</small>
-            </ResultText>
-          </a>
-        </StyledResultItem>
-      ))}
+      {products.length > 0 && (
+        <div>
+          {products
+            .filter((p) => p.name.toLowerCase().includes(query.toLowerCase()))
+            .map((product) => (
+              <StyledResultItem
+                key={product.id}
+                onClick={() => handleProductClick(product.id)}
+              >
+                {product.image && (
+                  <ResultImage src={product.image} alt={product.name} />
+                )}
+
+                <ResultText>
+                  {product.name}
+                  {product.description && <small>{product.description}</small>}
+                </ResultText>
+              </StyledResultItem>
+            ))}
+
+          {results.length > 0 && (
+            <div>
+              {results.map((result) => (
+                <StyledResultItem
+                  key={result.link}
+                  style={{
+                    cursor: "not-allowed",
+                    opacity: 0.5,
+                    pointerEvents: "none",
+                  }}
+                >
+                  {result.image && (
+                    <ResultImage src={result.image} alt={result.title} />
+                  )}
+                  <ResultText>
+                    <a
+                      href={result.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <strong>{result.title}</strong>
+                    </a>
+                    {result.snippet && <small>{result.snippet}</small>}
+                  </ResultText>
+                </StyledResultItem>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </StyledDropdownContainer>
   );
 };

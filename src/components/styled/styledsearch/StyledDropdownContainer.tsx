@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const StyledDropdownContainer = styled.ul`
   position: absolute;
   top: 11dvh;
-  right: -72px;
 
   width: 50vw;
   background-color: white;
@@ -21,7 +20,7 @@ export const StyledDropdownContainer = styled.ul`
 `;
 
 export const StyledResultItem = styled.li`
-  padding: 0.7rem;
+  padding: 1rem;
   border-bottom: 1px solid #eee;
   cursor: pointer;
 
